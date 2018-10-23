@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import com.think.dao.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -60,4 +62,5 @@ public class XbDataSource {
     public DataSource getShardingDataSource() {
         return shardingDataSource;
     }
+
 }

@@ -1,0 +1,5 @@
+.git/**
+*.class
+BootShardingStudy/.idea/
+BootShardingStudy/target/**
+BootShardingStudy/target/classes/*

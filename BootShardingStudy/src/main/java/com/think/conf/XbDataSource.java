@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
@@ -27,6 +29,8 @@ import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrateg
  */
 @Component
 public class XbDataSource {
+    @Resource
+    private Environment env;
 
     @Autowired
     private DataSource primaryDataSource;
@@ -36,6 +40,10 @@ public class XbDataSource {
     private DataSource secondaryDataSource;
 
     private DataSource shardingDataSource;
+
+
+
+
 
     @PostConstruct
     public void init() {
@@ -54,6 +62,7 @@ public class XbDataSource {
                 .databaseShardingStrategy(
                         new DatabaseShardingStrategy("user_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
                 .tableRules(tableRuleList).build();
+        Object obj = env.getProperty("spring.datasource.primary.url");
         shardingDataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
     }
 

@@ -34,9 +34,9 @@ public class DataSourceConfig {
     public DataSource primaryDataSource() {
        // return DataSourceBuilder.create().build();
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(druidDataSourceProperties.getUrl());
-        dataSource.setUsername(druidDataSourceProperties.getUsername());// 用户名
-        dataSource.setPassword(druidDataSourceProperties.getPassword());// 密码
+//        dataSource.setUrl(druidDataSourceProperties.getUrl());
+//        dataSource.setUsername(druidDataSourceProperties.getUsername());// 用户名
+//        dataSource.setPassword(druidDataSourceProperties.getPassword());// 密码
         return dataSource;
     }
 
@@ -45,9 +45,9 @@ public class DataSourceConfig {
     public DataSource secondaryDataSource() {
         // return DataSourceBuilder.create().build();
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(druidDataSourceSecProperties.getUrl());
-        dataSource.setUsername(druidDataSourceSecProperties.getUsername());// 用户名
-        dataSource.setPassword(druidDataSourceSecProperties.getPassword());// 密码
+//        dataSource.setUrl(druidDataSourceSecProperties.getUrl());
+//        dataSource.setUsername(druidDataSourceSecProperties.getUsername());// 用户名
+//        dataSource.setPassword(druidDataSourceSecProperties.getPassword());// 密码
         return dataSource;
     }
 

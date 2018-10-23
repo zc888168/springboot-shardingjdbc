@@ -1,25 +1,23 @@
 package com.think.conf;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
-
 import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
 import com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy;
 import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy;
+import com.think.algorithm.ProgramShardingAlgorithm;
+import com.think.algorithm.SingleKeyModuloDatabaseShardingAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /***
  * sharding-jdbc 配置数据源和分库分表规则
@@ -29,8 +27,6 @@ import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrateg
  */
 @Component
 public class XbDataSource {
-    @Resource
-    private Environment env;
 
     @Autowired
     private DataSource primaryDataSource;
@@ -60,9 +56,8 @@ public class XbDataSource {
                 .tableShardingStrategy(new TableShardingStrategy("order_id", new ProgramShardingAlgorithm())).build());
         ShardingRule shardingRule = ShardingRule.builder().dataSourceRule(dataSourceRule)
                 .databaseShardingStrategy(
-                        new DatabaseShardingStrategy("user_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
+                        new DatabaseShardingStrategy("order_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
                 .tableRules(tableRuleList).build();
-        Object obj = env.getProperty("spring.datasource.primary.url");
         shardingDataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
     }
 

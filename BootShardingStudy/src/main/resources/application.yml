@@ -1,0 +1,27 @@
+server:
+  port: 9099
+
+spring:
+  datasource:
+    primary:
+      name: testdb0
+      url: jdbc:mysql://127.0.0.1:3306/test0
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+    secondary:
+      name: testdb1
+      url: jdbc:mysql://127.0.0.1:3306/test1
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false

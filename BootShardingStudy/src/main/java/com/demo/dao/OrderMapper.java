@@ -1,12 +1,10 @@
 package com.demo.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.demo.entity.TOrder;
+
+import java.util.List;
 
 @Mapper
 public interface OrderMapper {
@@ -18,5 +16,16 @@ public interface OrderMapper {
             @Result(property = "orderId", column = "order_id"), })
     @Select("SELECT * FROM t_order WHERE order_id=#{id}")
     public TOrder findById(int id);
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
+    //@Select("SELECT * FROM t_order WHERE user_id in (<foreach item=\"item\" index=\"index\" collection=\"idList\" open=\"(\" separator=\",\" close=\")\"> #{item}</foreach>)")
+    @Select("SELECT * FROM t_order WHERE order_id in (31,32）")
+    public List<TOrder> queryIn(@Param("idList")List<Integer> idList);
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
+    @Select("SELECT * FROM t_order WHERE order_id between #{start} and #{end}")
+    public List<TOrder> queryBetween(@Param("start")Integer start, @Param("end")Integer end);
 
 }

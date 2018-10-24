@@ -1,5 +1,6 @@
 package com.demo.dao;
 
+import com.demo.conf.SimpleSelectInExtendedLanguageDriver;
 import org.apache.ibatis.annotations.*;
 
 import com.demo.entity.TOrder;
@@ -19,8 +20,8 @@ public interface OrderMapper {
 
     @Results(value = { @Result(property = "userId", column = "user_id"),
             @Result(property = "orderId", column = "order_id"), })
-    //@Select("SELECT * FROM t_order WHERE user_id in (<foreach item=\"item\" index=\"index\" collection=\"idList\" open=\"(\" separator=\",\" close=\")\"> #{item}</foreach>)")
-    @Select("SELECT * FROM t_order WHERE order_id in (31,32）")
+    @Lang(SimpleSelectInExtendedLanguageDriver.class)
+    @Select("SELECT * FROM t_order WHERE order_id in (#{idList})")
     public List<TOrder> queryIn(@Param("idList")List<Integer> idList);
 
     @Results(value = { @Result(property = "userId", column = "user_id"),

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 
 import com.think.entity.TOrder;
 
+import java.util.List;
+
 @Mapper
 public interface OrderMapper {
 
@@ -18,5 +20,15 @@ public interface OrderMapper {
             @Result(property = "orderId", column = "order_id"), })
     @Select("SELECT * FROM t_order WHERE order_id=#{id}")
     public TOrder findById(int id);
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
+    @Select("SELECT * from t_order where order_id in (31,32,33,34,35)")
+    public List<TOrder> findIn();
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
+    @Select("SELECT * from t_order where order_id between 31 and 36")
+    public List<TOrder> findbetween();
 
 }

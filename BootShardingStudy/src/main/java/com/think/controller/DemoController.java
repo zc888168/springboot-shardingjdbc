@@ -39,5 +39,19 @@ public class DemoController {
         //System.out.println(order.getOrderId() + "" + order.getUserId());
         return " order" ;
     }
+    @GetMapping("/listin")
+    public Object listin(){
+
+        orderMapper.findIn();
+        return " success" ;
+    }
+
+    @GetMapping("/listbetween")
+    public Object listbetween(){
+
+        orderMapper.findbetween();
+        return " success" ;
+    }
+
 
 }

@@ -1,8 +1,8 @@
-package com.think.controller;
+package com.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.think.dao.OrderMapper;
-import com.think.entity.TOrder;
+import com.demo.dao.OrderMapper;
+import com.demo.entity.TOrder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

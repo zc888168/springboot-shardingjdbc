@@ -1,4 +1,4 @@
-package com.think.conf;
+package com.demo.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,7 +12,7 @@ import javax.sql.DataSource;
  * 配置多个数据源
  *
  * @author thinkstop
- *
+ * @author chaozhang17
  */
 @Configuration
 public class DataSourceConfig {

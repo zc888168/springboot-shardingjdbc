@@ -1,4 +1,4 @@
-package com.think.algorithm;
+package com.demo.algorithm;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

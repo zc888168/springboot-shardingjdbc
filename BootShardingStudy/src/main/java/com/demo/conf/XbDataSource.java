@@ -1,4 +1,4 @@
-package com.think.conf;
+package com.demo.conf;
 
 import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
@@ -6,8 +6,8 @@ import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
 import com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy;
 import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy;
-import com.think.algorithm.ProgramShardingAlgorithm;
-import com.think.algorithm.SingleKeyModuloDatabaseShardingAlgorithm;
+import com.demo.algorithm.ProgramShardingAlgorithm;
+import com.demo.algorithm.SingleKeyModuloDatabaseShardingAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ import java.util.Map;
  * sharding-jdbc 配置数据源和分库分表规则
  * 
  * @author donghuating
+ * @author chaozhang17
  *
  */
 @Component

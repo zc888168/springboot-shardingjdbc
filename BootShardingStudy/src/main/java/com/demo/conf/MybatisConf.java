@@ -1,4 +1,4 @@
-package com.think.conf;
+package com.demo.conf;
 
 import javax.sql.DataSource;
 
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * mybatis的配置
  * 
  * @author donghuating
- *
+ * @author chaozhang17
  */
 @Configuration
 @EnableTransactionManagement
@@ -45,7 +45,7 @@ public class MybatisConf {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(
                 environment);
         // Dao层包路径
-        configuration.addMappers("com.think.dao.*");
+        configuration.addMappers("com.demo.dao.*");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
         return sqlSessionFactory;
     }

@@ -23,7 +23,7 @@ import java.util.Map;
 
 /***
  * sharding-jdbc 配置数据源和分库分表规则
- * 
+ *
  * @author donghuating
  * @author chaozhang17
  *
@@ -43,32 +43,32 @@ public class XbDataSource {
     private static final Logger logger = LoggerFactory.getLogger(XbDataSource.class);
 
 
-
-
-
+    /**
+     * 分库分表 需要先江对应的规则先添加进入来 如果有需要添加的策略 需要在这里面添加
+     */
     @PostConstruct
     public void init() {
-       try {
-           Map<String, DataSource> map = new HashMap<String, DataSource>();
-           map.put("testdb0", primaryDataSource);
-           map.put("testdb1", secondaryDataSource);
-           DataSourceRule dataSourceRule = new DataSourceRule(map);
-           List<TableRule> tableRuleList = new ArrayList<TableRule>();
-           List<String> pList = new ArrayList<String>();
-           for (int i = 0; i < 2; i++) {
-               pList.add("t_order_" + i);
-           }
-           tableRuleList.add(new TableRule.TableRuleBuilder("t_order").actualTables(pList).dataSourceRule(dataSourceRule)
-                   .tableShardingStrategy(new TableShardingStrategy("order_id", new ProgramShardingAlgorithm())).build());
-           ShardingRule shardingRule = ShardingRule.builder().dataSourceRule(dataSourceRule)
-                   .databaseShardingStrategy(
-                           new DatabaseShardingStrategy("order_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
-                   .tableRules(tableRuleList).build();
-           shardingDataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
-       }catch (Exception e) {
-           logger.error("XbDataSource init error :", e);
-           
-       }
+        try {
+            Map<String, DataSource> map = new HashMap<String, DataSource>();
+            map.put("testdb0", primaryDataSource);
+            map.put("testdb1", secondaryDataSource);
+            DataSourceRule dataSourceRule = new DataSourceRule(map);
+            List<TableRule> tableRuleList = new ArrayList<TableRule>();
+            List<String> pList = new ArrayList<String>();
+            for (int i = 0; i < 2; i++) {
+                pList.add("t_order_" + i);
+            }
+            tableRuleList.add(new TableRule.TableRuleBuilder("t_order").actualTables(pList).dataSourceRule(dataSourceRule)
+                    .tableShardingStrategy(new TableShardingStrategy("order_id", new ProgramShardingAlgorithm())).build());
+            ShardingRule shardingRule = ShardingRule.builder().dataSourceRule(dataSourceRule)
+                    .databaseShardingStrategy(
+                            new DatabaseShardingStrategy("order_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
+                    .tableRules(tableRuleList).build();
+            shardingDataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
+        } catch (Exception e) {
+            logger.error("XbDataSource init error :", e);
+
+        }
     }
 
     public DataSource getShardingDataSource() {

@@ -1,5 +1,6 @@
 package com.demo.conf;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.mapping.Environment;
@@ -9,6 +10,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -25,8 +27,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class MybatisConf {
 
-    @Autowired
+    @Resource
     private XbDataSource xbDataSource;
+
+    @Value("${spring.datasource.environments}")
+    private String environmentId;
 
     /**
      * 获取sqlFactory
@@ -41,7 +46,7 @@ public class MybatisConf {
          */
         DataSource dataSource = xbDataSource.getShardingDataSource();
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("development", transactionFactory, dataSource);
+        Environment environment = new Environment(environmentId, transactionFactory, dataSource);
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(
                 environment);
         // Dao层包路径

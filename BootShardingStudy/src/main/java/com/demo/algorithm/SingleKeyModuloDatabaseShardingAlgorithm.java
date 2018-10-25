@@ -1,19 +1,19 @@
-package com.think.conf;
+package com.demo.algorithm;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
 import com.dangdang.ddframe.rdb.sharding.api.ShardingValue;
-import com.dangdang.ddframe.rdb.sharding.api.strategy.table.SingleKeyTableShardingAlgorithm;
+import com.dangdang.ddframe.rdb.sharding.api.strategy.database.SingleKeyDatabaseShardingAlgorithm;
 import com.google.common.collect.Range;
 
-/**
- * table 分片算法
+/***
+ * dataBase分库算法
  * 
  * @author donghuating
  *
  */
-public class ProgramShardingAlgorithm implements SingleKeyTableShardingAlgorithm<Integer> {
+public class SingleKeyModuloDatabaseShardingAlgorithm implements SingleKeyDatabaseShardingAlgorithm<Integer> {
 
     public String doEqualSharding(Collection<String> availableTargetNames, ShardingValue<Integer> shardingValue) {
         for (String each : availableTargetNames) {
@@ -26,12 +26,12 @@ public class ProgramShardingAlgorithm implements SingleKeyTableShardingAlgorithm
 
     public Collection<String> doInSharding(Collection<String> availableTargetNames,
             ShardingValue<Integer> shardingValue) {
-        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
+        Collection<String> result = new LinkedHashSet<>(availableTargetNames.size());
         Collection<Integer> values = shardingValue.getValues();
         for (Integer value : values) {
-            for (String tableNames : availableTargetNames) {
-                if (tableNames.endsWith(value % 2 + "")) {
-                    result.add(tableNames);
+            for (String dataSourceName : availableTargetNames) {
+                if (dataSourceName.endsWith(value % 2 + "")) {
+                    result.add(dataSourceName);
                 }
             }
         }
@@ -40,7 +40,7 @@ public class ProgramShardingAlgorithm implements SingleKeyTableShardingAlgorithm
 
     public Collection<String> doBetweenSharding(Collection<String> availableTargetNames,
             ShardingValue<Integer> shardingValue) {
-        Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
+        Collection<String> result = new LinkedHashSet<>(availableTargetNames.size());
         Range<Integer> range = shardingValue.getValueRange();
         for (Integer i = range.lowerEndpoint(); i <= range.upperEndpoint(); i++) {
             for (String each : availableTargetNames) {

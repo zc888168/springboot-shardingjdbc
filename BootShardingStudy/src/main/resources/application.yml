@@ -1,8 +1,10 @@
 server:
   port: 9099
 
+
 spring:
   datasource:
+    environments: development
     primary:
       name: testdb0
       url: jdbc:mysql://127.0.0.1:3306/test0

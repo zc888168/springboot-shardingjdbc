@@ -1,6 +1,8 @@
 package com.demo;
 
 import com.dangdang.ddframe.rdb.sharding.keygen.DefaultKeyGenerator;
+import com.dangdang.ddframe.rdb.sharding.keygen.KeyGenerator;
+import com.dangdang.ddframe.rdb.sharding.keygen.KeyGeneratorFactory;
 
 /**
  * Description:
@@ -20,8 +22,8 @@ public class IdGeneratorTest {
 //        HostNameIdGenerator hostNameIdGenerator = new HostNameIdGenerator();
 //        System.out.println(hostNameIdGenerator.generateId());
 
-        DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
 
+        KeyGenerator defaultKeyGenerator =KeyGeneratorFactory.createKeyGenerator(DefaultKeyGenerator.class);
         System.out.println(defaultKeyGenerator.generateKey());
         System.out.println(defaultKeyGenerator.generateKey());
         System.out.println(defaultKeyGenerator.generateKey());

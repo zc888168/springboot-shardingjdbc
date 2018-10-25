@@ -75,12 +75,12 @@
             <artifactId>sharding-jdbc-config-spring</artifactId>
             <version>${sharding-jdbc.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.dangdang</groupId>
-            <artifactId>sharding-jdbc-self-id-generator</artifactId>
-            <!--<version>${sharding-jdbc.version}</version>-->
-            <version>1.4.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.dangdang</groupId>-->
+            <!--<artifactId>sharding-jdbc-self-id-generator</artifactId>-->
+            <!--&lt;!&ndash;<version>${sharding-jdbc.version}</version>&ndash;&gt;-->
+            <!--<version>1.4.1</version>-->
+        <!--</dependency>-->
 
         <!--dangdang sharding-jdbc end -->
 

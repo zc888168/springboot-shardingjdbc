@@ -2,6 +2,8 @@ package com.demo;
 
 import com.dangdang.ddframe.rdb.sharding.keygen.DefaultKeyGenerator;
 
+import java.math.BigInteger;
+
 /**
  * Description:
  * Created by chaoz2 on 2018/10/25.
@@ -22,5 +24,13 @@ public class IdGeneratorTest {
 
         DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
         System.out.println(defaultKeyGenerator.generateKey());
+//        long time = System.currentTimeMillis();
+//        System.out.println(time);
+//        System.out.println(String.valueOf(time).length());
+//        BigInteger  value = BigInteger.valueOf(time)
+//        BigInteger value2 = value.longValue()<<2;
+//        System.out.println(value);
+//        System.out.println(String.valueOf(value).length());
+
     }
 }

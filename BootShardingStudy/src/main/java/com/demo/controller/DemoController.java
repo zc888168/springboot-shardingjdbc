@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.demo.algorithm.IdGenerator;
 import com.demo.dao.OrderMapper;
 import com.demo.entity.TOrder;
 import com.google.common.collect.Lists;
@@ -23,6 +24,9 @@ public class DemoController {
     @Resource
     private OrderMapper orderMapper;
 
+    @Resource
+    private IdGenerator idGenerator;
+
     @GetMapping("/index")
     public Object index() {
         return "SUCCESS";
@@ -36,10 +40,10 @@ public class DemoController {
     }
 
     @GetMapping("/add")
-    public Object add(@RequestParam("orderId") Integer orderId, @RequestParam("userId") Integer userId) {
+    public Object add(@RequestParam("userId") Integer userId) {
         TOrder order = new TOrder();
         order.setUserId(userId);
-        order.setOrderId(orderId);
+        order.setOrderId(idGenerator.getIdGenerator().generateKey().intValue());
         orderMapper.insert(order);
         return JSONObject.toJSONString(order);
     }

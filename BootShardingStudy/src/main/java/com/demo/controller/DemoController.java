@@ -1,9 +1,10 @@
 package com.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dangdang.ddframe.rdb.sharding.keygen.DefaultKeyGenerator;
 import com.demo.dao.OrderMapper;
 import com.demo.entity.TOrder;
-import com.google.common.collect.Lists;
+import com.demo.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,9 @@ import java.util.List;
 public class DemoController {
     @Resource
     private OrderMapper orderMapper;
+
+    @Resource
+    private OrderService orderService;
 
     @GetMapping("/index")
     public Object index() {
@@ -44,6 +48,16 @@ public class DemoController {
         return JSONObject.toJSONString(order);
     }
 
+    @GetMapping("/addTransaction")
+    public Object addTransaction(@RequestParam("orderId") Integer orderId) {
+        DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
+        TOrder order = new TOrder();
+        order.setOrderId(orderId);
+        order.setUserId(defaultKeyGenerator.generateKey().intValue());
+        orderService.serviceC(order);
+        return JSONObject.toJSONString(order);
+    }
+
     @GetMapping("/queryIn")
     public Object in(@RequestParam("orderIds") String orderIds) {
         String[] ids = orderIds.split(",");
@@ -52,8 +66,8 @@ public class DemoController {
             idList.add(Integer.valueOf(id));
         }
         int[] array = new int[2];
-        array[0] =31;
-        array[1] =32;
+        array[0] = 31;
+        array[1] = 32;
         List<TOrder> lists = orderMapper.queryIn(idList);
         return JSONObject.toJSONString(lists);
     }

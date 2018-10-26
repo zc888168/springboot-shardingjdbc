@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +46,8 @@ public class MybatisConf {
          * sharding-jdbc 产生的DataSource
          */
         DataSource dataSource = xbDataSource.getShardingDataSource();
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+//        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+        TransactionFactory transactionFactory = new SpringManagedTransactionFactory();
         Environment environment = new Environment(environmentId, transactionFactory, dataSource);
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration(
                 environment);

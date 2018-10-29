@@ -58,6 +58,13 @@ public class DemoController {
         return JSONObject.toJSONString(lists);
     }
 
+    @GetMapping("/order")
+    public Object order(){
+        List<TOrder> lists = orderMapper.listOrder();
+        return JSONObject.toJSONString(lists);
+    }
+
+
     @GetMapping("/queryBetween")
     public Object queryBetween(@RequestParam("start") Integer start, @RequestParam("start") Integer end) {
         List<TOrder> lists = orderMapper.queryBetween(start, end);

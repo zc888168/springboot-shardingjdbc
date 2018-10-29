@@ -24,6 +24,9 @@ public interface OrderMapper {
     @Select("SELECT * FROM t_order WHERE order_id in (#{idList})")
     public List<TOrder> queryIn(@Param("idList")List<Integer> idList);
 
+    @Select("select * from t_order  order by user_id desc")
+    public List<TOrder> listOrder();
+
     @Results(value = { @Result(property = "userId", column = "user_id"),
             @Result(property = "orderId", column = "order_id"), })
     @Select("SELECT * FROM t_order WHERE order_id between #{start} and #{end}")

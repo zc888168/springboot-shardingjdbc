@@ -28,6 +28,16 @@ public interface OrderMapper {
 
     @Results(value = { @Result(property = "userId", column = "user_id"),
             @Result(property = "orderId", column = "order_id"), })
+    @Select("select * from t_order order by order_id asc")
+    public List<TOrder> testOrder();
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
+    @Select("select * from t_order order by order_id asc limit 2,2")
+    public List<TOrder> testPage();
+
+    @Results(value = { @Result(property = "userId", column = "user_id"),
+            @Result(property = "orderId", column = "order_id"), })
     @Select("SELECT * from t_order where order_id between 31 and 36")
     public List<TOrder> findbetween();
 

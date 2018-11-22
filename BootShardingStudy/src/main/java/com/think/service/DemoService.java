@@ -1,6 +1,11 @@
 package com.think.service;
 
+import com.think.dao.OrderMapper;
+import com.think.entity.TOrder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Description:
@@ -9,7 +14,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoService {
 
-    public void test(){
-        System.out.println("xxxx");
+    @Resource
+    private OrderMapper orderMapper;
+
+
+    public TOrder findById(int id) {
+        return orderMapper.findById(31);
+    }
+
+    public void listIn() {
+        orderMapper.findIn();
+    }
+
+    public List<TOrder> testOrder() {
+        List<TOrder> list = orderMapper.testOrder();
+        return list;
+    }
+
+    public List<TOrder> testPage() {
+        return orderMapper.testPage();
+    }
+
+    public void findbetween() {
+        orderMapper.findbetween();
     }
 }

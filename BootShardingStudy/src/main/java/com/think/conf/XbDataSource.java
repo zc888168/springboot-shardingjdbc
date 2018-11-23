@@ -54,7 +54,7 @@ public class XbDataSource {
                 .tableShardingStrategy(new TableShardingStrategy("order_id", new ProgramShardingAlgorithm())).build());
         ShardingRule shardingRule = ShardingRule.builder().dataSourceRule(dataSourceRule)
                 .databaseShardingStrategy(
-                        new DatabaseShardingStrategy("user_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
+                        new DatabaseShardingStrategy("order_id", new SingleKeyModuloDatabaseShardingAlgorithm()))
                 .tableRules(tableRuleList).build();
         shardingDataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
     }

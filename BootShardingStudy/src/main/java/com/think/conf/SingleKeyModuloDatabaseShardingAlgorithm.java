@@ -9,7 +9,7 @@ import com.google.common.collect.Range;
 
 /***
  * dataBase分库算法
- * 
+ *
  * @author donghuating
  *
  */
@@ -25,7 +25,7 @@ public class SingleKeyModuloDatabaseShardingAlgorithm implements SingleKeyDataba
     }
 
     public Collection<String> doInSharding(Collection<String> availableTargetNames,
-            ShardingValue<Integer> shardingValue) {
+                                           ShardingValue<Integer> shardingValue) {
         Collection<String> result = new LinkedHashSet<>(availableTargetNames.size());
         Collection<Integer> values = shardingValue.getValues();
         for (Integer value : values) {
@@ -39,7 +39,7 @@ public class SingleKeyModuloDatabaseShardingAlgorithm implements SingleKeyDataba
     }
 
     public Collection<String> doBetweenSharding(Collection<String> availableTargetNames,
-            ShardingValue<Integer> shardingValue) {
+                                                ShardingValue<Integer> shardingValue) {
         Collection<String> result = new LinkedHashSet<>(availableTargetNames.size());
         Range<Integer> range = shardingValue.getValueRange();
         for (Integer i = range.lowerEndpoint(); i <= range.upperEndpoint(); i++) {

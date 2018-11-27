@@ -9,6 +9,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * Description:
  * Created by zc on 2018/11/22.
  */
-@SpringBootApplication(scanBasePackageClasses = {ApplicationTest.class, Application.class})
-public class ApplicationTest extends SpringBootServletInitializer {
-}
+//@SpringBootApplication(scanBasePackageClasses = {ApplicationTest.class, Application.class})
+//public class ApplicationTest extends SpringBootServletInitializer {
+//}

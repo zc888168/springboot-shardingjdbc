@@ -1,10 +1,6 @@
 package com.think.dao;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.think.entity.TOrder;
 
@@ -40,5 +36,16 @@ public interface OrderMapper {
             @Result(property = "orderId", column = "order_id"), })
     @Select("SELECT * from t_order where order_id between 31 and 36")
     public List<TOrder> findbetween();
+
+    @Insert("INSERT INTO `t_order`( " +
+            "          <include refid=\"Base_Column_List\"/> " +
+            "          ) " +
+            "          VALUES " +
+            "         <foreach collection=\"list\" item=\"item\" index=\"index\" open=\"(\" " +
+            "                   close=\");\" separator=\"),(\"> " +
+            "              #{item.orderId,jdbcType=INTEGER}, " +
+            "              #{item.userId,jdbcType=INTEGER} " +
+            "          </foreach>")
+    public void batchInsert(@Param("list") List<TOrder> list);
 
 }

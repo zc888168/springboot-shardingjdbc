@@ -1,5 +1,6 @@
 package com.think.service;
 
+import com.google.common.collect.Lists;
 import com.think.dao.OrderMapper;
 import com.think.entity.TOrder;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,18 @@ public class DemoService {
 
     public void findbetween() {
         orderMapper.findbetween();
+    }
+
+    public void batchInsert(Integer id) {
+        List<TOrder> list = Lists.newArrayList();
+        TOrder tOrder = new TOrder();
+        tOrder.setOrderId(id);
+        tOrder.setUserId(id);
+        TOrder tOrder2 = new TOrder();
+        tOrder2.setUserId(id + 1);
+        tOrder2.setOrderId(id + 1);
+        list.add(tOrder2);
+        orderMapper.batchInsert(list);
+
     }
 }

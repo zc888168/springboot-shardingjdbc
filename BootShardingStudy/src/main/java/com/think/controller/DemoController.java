@@ -6,10 +6,7 @@ import com.think.entity.TOrder;
 import com.think.service.DemoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -65,6 +62,12 @@ public class DemoController {
     public Object between() {
         demoService.findbetween();
         return " success";
+    }
+    @PutMapping("/batch/{id}")
+    @ApiOperation("batch")
+    public String batchInsert(@PathVariable Integer id){
+        demoService.batchInsert(id);
+                return "success";
     }
 
 
